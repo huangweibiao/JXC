@@ -1,0 +1,26 @@
+# 开发环境配置
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jxc_db?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+
+  security:
+    oauth2:
+      client:
+        registration:
+          jxc-client:
+            client-id: jxc-client-dev
+            client-secret: jxc-secret-dev
+        provider:
+          oauth2-server:
+            issuer-uri: http://localhost:8081
+
+logging:
+  level:
+    root: INFO
+    com.jxc: DEBUG
+    com.jxc.mapper: DEBUG

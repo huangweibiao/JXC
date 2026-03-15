@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JXC进销存系统</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <div th:replace="~{:: headFragment}"></div>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <h1>JXC进销存管理系统</h1>
+        </div>
+        <div class="header-right" sec:authorize="isAuthenticated()">
+            <span>欢迎，<span sec:authentication="name">用户</span></span>
+            <a href="/logout">退出登录</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <a href="/" th:class="${activeMenu == 'dashboard' ? 'active' : ''}">
+                    <i class="icon-dashboard"></i> 首页
+                </a>
+                <div class="menu-group">
+                    <div class="menu-title">采购管理</div>
+                    <a href="/purchase/orders" th:class="${activeMenu == 'purchase-orders' ? 'active' : ''}">采购订单</a>
+                    <a href="/purchase/inbound" th:class="${activeMenu == 'purchase-inbound' ? 'active' : ''}">采购入库</a>
+                    <a href="/suppliers" th:class="${activeMenu == 'suppliers' ? 'active' : ''}">供应商管理</a>
+                </div>
+                <div class="menu-group">
+                    <div class="menu-title">销售管理</div>
+                    <a href="/sales/orders" th:class="${activeMenu == 'sales-orders' ? 'active' : ''}">销售订单</a>
+                    <a href="/sales/outbound" th:class="${activeMenu == 'sales-outbound' ? 'active' : ''}">销售出库</a>
+                    <a href="/customers" th:class="${activeMenu == 'customers' ? 'active' : ''}">客户管理</a>
+                </div>
+                <div class="menu-group">
+                    <div class="menu-title">库存管理</div>
+                    <a href="/inventory/list" th:class="${activeMenu == 'inventory-list' ? 'active' : ''}">库存查询</a>
+                    <a href="/inventory/stocktaking" th:class="${activeMenu == 'inventory-stocktaking' ? 'active' : ''}">库存盘点</a>
+                    <a href="/inventory/warning" th:class="${activeMenu == 'inventory-warning' ? 'active' : ''}">库存预警</a>
+                </div>
+                <div class="menu-group">
+                    <div class="menu-title">基础数据</div>
+                    <a href="/products" th:class="${activeMenu == 'products' ? 'active' : ''}">商品管理</a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div th:replace="~{:: content}"></div>
+        </main>
+    </div>
+
+    <script th:src="@{/js/app.js}"></script>
+</body>
+</html>
